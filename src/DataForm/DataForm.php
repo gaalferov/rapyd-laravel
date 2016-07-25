@@ -126,6 +126,8 @@ class DataForm extends Widget
             throw new \InvalidArgumentException('Third argument («type») must point to class inherited Field class');
         }
 
+        $field_obj->label = trans($field_obj->label);
+
         if ($field_obj->type == "file") {
             $this->multipart = true;
         }
@@ -184,8 +186,13 @@ class DataForm extends Widget
      */
     public function submit($name, $position = "BL", $options = array())
     {
+        if (!$position) {
+            $position = 'BL';
+        }
         $options = array_merge(array("class" => "btn btn-primary"), $options);
-        $this->button_container[$position][] = Form::submit($name, $options);
+        $name = trans($name);
+        $button = Form::submit($name, $options);
+        $this->button_container[$position][] = $button;
 
         return $this;
     }
@@ -199,7 +206,15 @@ class DataForm extends Widget
      */
     public function reset($name = "", $position = "BL", $options = array())
     {
-        if ($name == "") $name = trans('rapyd::rapyd.reset');
+        if ($name == "") {
+            $name = trans('rapyd::rapyd.reset');
+        } else {
+            $name = trans($name);
+        }
+        if (!$position) {
+            $position = 'BL';
+        }
+
         $this->link($this->url->current(true), $name, $position, $options);
 
         return $this;

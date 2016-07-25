@@ -18,6 +18,7 @@ class Column
 
     public $value = null;
     public $cell_callable;
+    public $route;
 
     public function __construct($name, $label = null, $orderby = false)
     {
@@ -32,7 +33,7 @@ class Column
         $filter = strstr($name, '|');
         if ($filter) {
             $this->name = strstr($name, '|', true);
-            $this->filter(trim($filter,'|'));
+            $this->filter(trim($filter, '|'));
         }
 
         $this->label($label);
@@ -41,12 +42,12 @@ class Column
 
     protected function label($label)
     {
-        $this->label = $label;
+        $this->label = trans($label);
     }
 
     protected function orderby($orderby)
     {
-        $this->orderby = (bool) $orderby;
+        $this->orderby = (bool)$orderby;
         if ($this->orderby) {
             $this->orderby_field = (is_string($orderby)) ? $orderby : $this->name;
         }
@@ -57,6 +58,13 @@ class Column
     public function link($url)
     {
         $this->link = $url;
+
+        return $this;
+    }
+
+    public function route($route)
+    {
+        $this->route = $route;
 
         return $this;
     }

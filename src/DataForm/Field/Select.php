@@ -23,9 +23,12 @@ class Select extends Field
     {
         $output = "";
 
+        $this->options = array_prepend($this->options, $this->label, '');
+
         unset($this->attributes['type'], $this->attributes['size']);
-        if (parent::build() === false)
+        if (parent::build() === false) {
             return;
+        }
 
         switch ($this->status) {
             case "disabled":
@@ -35,12 +38,13 @@ class Select extends Field
                 } else {
                     $output = $this->description;
                 }
-                $output = "<div class='help-block'>".$output."&nbsp;</div>";
+                $output = "<div class='help-block'>" . $output . "&nbsp;</div>";
                 break;
 
             case "create":
             case "modify":
-                $output = Form::select($this->name, $this->options, $this->value, $this->attributes) . $this->extra_output;
+                $output = Form::select($this->name, $this->options, $this->value,
+                        $this->attributes) . $this->extra_output;
                 break;
 
             case "hidden":

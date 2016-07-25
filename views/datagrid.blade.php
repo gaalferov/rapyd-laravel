@@ -1,5 +1,3 @@
-
-
 <div class="rpd-datagrid">
     @include('rapyd::toolbar', array('label'=>$label, 'buttons_right'=>$buttons['TR']))
 
@@ -10,29 +8,35 @@
             @foreach ($dg->columns as $column)
                 <th{!! $column->buildAttributes() !!}>
                     @if ($column->orderby)
-                        @if ($dg->onOrderby($column->orderby_field, 'asc'))
-                            <span class="glyphicon glyphicon-chevron-up"></span>
-                        @else
-                            <a href="{{ $dg->orderbyLink($column->orderby_field,'asc') }}">
-                                <span class="glyphicon glyphicon-chevron-up"></span>
-                            </a>
-                        @endif
                         @if ($dg->onOrderby($column->orderby_field, 'desc'))
-                            <span class="glyphicon glyphicon-chevron-down"></span>
+                            <a href="{{ $dg->orderbyLink($column->orderby_field,'asc') }}">
+                                <i class="fa fa-sort-amount-desc"></i>
+                                {!! $column->label !!}
+                            </a>
+                        @elseif ($dg->onOrderby($column->orderby_field, 'asc'))
+                            <a href="{{ $dg->orderbyLink($column->orderby_field,'desc') }}">
+                                <i class="fa fa-sort-amount-asc"></i>
+                                {!! $column->label !!}
+                            </a>
                         @else
                             <a href="{{ $dg->orderbyLink($column->orderby_field,'desc') }}">
-                                <span class="glyphicon glyphicon-chevron-down"></span>
+                                <i class="fa fa-sort-amount-asc"></i>
+                                {!! $column->label !!}
                             </a>
                         @endif
+                    @else
+                        {!! $column->label !!}
                     @endif
-                    {!! $column->label !!}
+
                 </th>
             @endforeach
         </tr>
         </thead>
         <tbody>
         @if (count($dg->rows) == 0)
-            <tr><td colspan="{!! count($dg->columns) !!}">{!! trans('rapyd::rapyd.no_records') !!}</td></tr>
+            <tr>
+                <td colspan="{!! count($dg->columns) !!}">{!! trans('rapyd::rapyd.no_records') !!}</td>
+            </tr>
         @endif
         @foreach ($dg->rows as $row)
             <tr{!! $row->buildAttributes() !!}>
