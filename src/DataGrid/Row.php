@@ -30,9 +30,13 @@ class Row
         return $this->cells[$index];
     }
 
-    public function attributes($attributes)
+    public function attributes($attributes, $reset = false)
     {
-        $this->attributes = $attributes;
+        if ($reset) {
+            $this->attributes = $attributes;
+        } else {
+            $this->attributes += $attributes;
+        }
 
         return $this;
     }
