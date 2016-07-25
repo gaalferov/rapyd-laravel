@@ -14,7 +14,7 @@ class DataGrid extends DataSet
     public $headers = array();
     public $rows = array();
     public $output = "";
-    public $attributes = array("class" => "table");
+    public $attributes = array("class" => "table table-data table-bordered");
     public $checkbox_form = false;
 
     protected $row_callable = array();

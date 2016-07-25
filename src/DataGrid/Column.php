@@ -69,9 +69,13 @@ class Column
         return $this;
     }
 
-    public function attributes($attributes)
+    public function attributes($attributes, $reset = false)
     {
-        $this->attributes = $attributes;
+        if ($reset) {
+            $this->attributes = $attributes;
+        } else {
+            $this->attributes += $attributes;
+        }
 
         return $this;
     }
@@ -119,6 +123,11 @@ class Column
 
     public function buildAttributes()
     {
+        if (!isset($this->attributes['class'])) {
+            $this->attributes['class'] = '';
+        }
+        $this->attributes['class'] = 'col-'.preg_replace('~[^a-z0-9]~ui', '-', $this->name);
+
         return HTML::buildAttributes($this->attributes);
     }
 
