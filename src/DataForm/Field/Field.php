@@ -686,6 +686,17 @@ abstract class Field extends Widget
         return '';
     }
 
+    public function attr($attributes, $value = null)
+    {
+        if (is_array($attributes)) {
+            $this->attributes = array_merge($this->attributes, $attributes);
+        } else {
+            $this->attributes[$attributes] = $value;
+        }
+
+        return $this;
+    }
+
     public function all()
     {
         $output  = "";
