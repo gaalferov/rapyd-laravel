@@ -1,6 +1,6 @@
-<?php namespace Zofe\Rapyd\DataGrid;
+<?php namespace Iginikolaev\Rapyd\DataGrid;
 
-use Zofe\Rapyd\Helpers\HTML;
+use Iginikolaev\Rapyd\Helpers\HTML;
 
 class Cell
 {

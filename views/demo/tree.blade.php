@@ -8,8 +8,8 @@
         {!! $tree !!}
     <p>
 
-        {!! Documenter::showMethod("Zofe\\Rapyd\\Demo\\DemoController", "anyDatatree") !!}
-        {!! Documenter::showMethod("Zofe\\Rapyd\\Demo\\DemoController", "anyMenuedit") !!}
-        {!! Documenter::showCode("zofe/rapyd/views/demo/tree.blade.php") !!}
+        {!! Documenter::showMethod("Iginikolaev\\Rapyd\\Demo\\DemoController", "anyDatatree") !!}
+        {!! Documenter::showMethod("Iginikolaev\\Rapyd\\Demo\\DemoController", "anyMenuedit") !!}
+        {!! Documenter::showCode("iginikolaev/rapyd/views/demo/tree.blade.php") !!}
     </p>
 @stop

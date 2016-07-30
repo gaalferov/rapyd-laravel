@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd\DataForm\Field;
+<?php namespace Iginikolaev\Rapyd\DataForm\Field;
 
 use Collective\Html\FormFacade as Form;
 use Illuminate\Support\Facades\Input;

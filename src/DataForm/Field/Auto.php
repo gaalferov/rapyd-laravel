@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd\DataForm\Field;
+<?php namespace Iginikolaev\Rapyd\DataForm\Field;
 
 class Auto extends Field
 {

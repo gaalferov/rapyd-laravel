@@ -1,6 +1,6 @@
 <?php
 
-namespace Zofe\Rapyd\DataForm\Field;
+namespace Iginikolaev\Rapyd\DataForm\Field;
 
 
 //TODO simple 

@@ -1,8 +1,8 @@
-<?php namespace Zofe\Rapyd\DataForm\Field;
+<?php namespace Iginikolaev\Rapyd\DataForm\Field;
 
 use Illuminate\Support\Facades\Config;
-use Zofe\Rapyd\Widget;
-use Zofe\Rapyd\Helpers\HTML;
+use Iginikolaev\Rapyd\Widget;
+use Iginikolaev\Rapyd\Helpers\HTML;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Input;
 

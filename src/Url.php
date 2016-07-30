@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd;
+<?php namespace Iginikolaev\Rapyd;
 
 use Illuminate\Support\Facades\Request;
 

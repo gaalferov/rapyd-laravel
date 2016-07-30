@@ -1,14 +1,14 @@
 <?php
 
-namespace Zofe\Rapyd\DataTree;
+namespace Iginikolaev\Rapyd\DataTree;
 
 use Baum\Node;
 use Illuminate\Support\Collection;
 use Collective\Html\FormFacade as Form;
-use Zofe\Rapyd\DataGrid\Cell;
-use Zofe\Rapyd\DataGrid\DataGrid;
-use Zofe\Rapyd\DataGrid\Row;
-use Zofe\Rapyd\Persistence;
+use Iginikolaev\Rapyd\DataGrid\Cell;
+use Iginikolaev\Rapyd\DataGrid\DataGrid;
+use Iginikolaev\Rapyd\DataGrid\Row;
+use Iginikolaev\Rapyd\Persistence;
 
 class DataTree extends DataGrid
 {

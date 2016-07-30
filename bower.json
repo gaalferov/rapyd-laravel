@@ -1,5 +1,5 @@
 {
-  "name": "zofe/rapyd",
+  "name": "iginikolaev/rapyd",
   "dependencies": {
     "jquery": "^1.9",
     "bootstrap": "~3.1.1",

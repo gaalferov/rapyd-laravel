@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd\Demo;
+<?php namespace Iginikolaev\Rapyd\Demo;
 
 /**
  * Category
@@ -10,7 +10,7 @@ class Category extends \Eloquent
 
     public function articles()
     {
-        return $this->belongsToMany('Zofe\Rapyd\Models\Article', 'demo_article_category', 'category_id','article_id');
+        return $this->belongsToMany('Iginikolaev\Rapyd\Models\Article', 'demo_article_category', 'category_id','article_id');
     }
 
     public function parent()

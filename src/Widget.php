@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd;
+<?php namespace Iginikolaev\Rapyd;
 
 use Collective\Html\FormFacade as Form;
 use Collective\Html\HtmlFacade as HTML;

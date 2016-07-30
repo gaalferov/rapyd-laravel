@@ -8,7 +8,7 @@
     <p>
 
         {!! $grid !!}
-        {!! Documenter::showMethod("Zofe\\Rapyd\\Demo\\DemoController", "getGrid") !!}
-        {!! Documenter::showCode("zofe/rapyd/views/demo/grid.blade.php") !!}
+        {!! Documenter::showMethod("Iginikolaev\\Rapyd\\Demo\\DemoController", "getGrid") !!}
+        {!! Documenter::showCode("iginikolaev/rapyd/views/demo/grid.blade.php") !!}
     </p>
 @stop

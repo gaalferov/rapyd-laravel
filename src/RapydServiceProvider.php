@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd;
+<?php namespace Iginikolaev\Rapyd;
 
 use Collective\Html\FormBuilder;
 use Collective\Html\HtmlBuilder;
@@ -17,7 +17,7 @@ class RapydServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'rapyd');
         
         //assets
-        $this->publishes([__DIR__.'/../public/assets' => public_path('packages/zofe/rapyd/assets')], 'assets');
+        $this->publishes([__DIR__.'/../public/assets' => public_path('packages/iginikolaev/rapyd/assets')], 'assets');
         
         //config
         $this->publishes([__DIR__.'/../config/rapyd.php' => config_path('rapyd.php')], 'config');
@@ -52,7 +52,7 @@ class RapydServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register('Collective\Html\HtmlServiceProvider');
-        $this->app->register('Zofe\Burp\BurpServiceProvider');
+        $this->app->register('Iginikolaev\Burp\BurpServiceProvider');
         
         Rapyd::setContainer($this->app);
    
@@ -61,17 +61,17 @@ class RapydServiceProvider extends ServiceProvider
 
             $loader->alias('Input', 'Illuminate\Support\Facades\Input');
             
-            $loader->alias('Rapyd'     , 'Zofe\Rapyd\Facades\Rapyd'     );
+            $loader->alias('Rapyd'     , 'Iginikolaev\Rapyd\Facades\Rapyd'     );
             
             //deprecated .. and more facade are really needed ?
-            $loader->alias('DataSet'   , 'Zofe\Rapyd\Facades\DataSet'   );
-            $loader->alias('DataGrid'  , 'Zofe\Rapyd\Facades\DataGrid'  );
-            $loader->alias('DataForm'  , 'Zofe\Rapyd\Facades\DataForm'  );
-            $loader->alias('DataEdit'  , 'Zofe\Rapyd\Facades\DataEdit'  );
-            $loader->alias('DataFilter', 'Zofe\Rapyd\Facades\DataFilter');
-            $loader->alias('DataEmbed' , 'Zofe\Rapyd\Facades\DataEmbed');
-            $loader->alias('DataTree' , 'Zofe\Rapyd\Facades\DataTree');
-            $loader->alias('Documenter', 'Zofe\Rapyd\Facades\Documenter');
+            $loader->alias('DataSet'   , 'Iginikolaev\Rapyd\Facades\DataSet'   );
+            $loader->alias('DataGrid'  , 'Iginikolaev\Rapyd\Facades\DataGrid'  );
+            $loader->alias('DataForm'  , 'Iginikolaev\Rapyd\Facades\DataForm'  );
+            $loader->alias('DataEdit'  , 'Iginikolaev\Rapyd\Facades\DataEdit'  );
+            $loader->alias('DataFilter', 'Iginikolaev\Rapyd\Facades\DataFilter');
+            $loader->alias('DataEmbed' , 'Iginikolaev\Rapyd\Facades\DataEmbed');
+            $loader->alias('DataTree' , 'Iginikolaev\Rapyd\Facades\DataTree');
+            $loader->alias('Documenter', 'Iginikolaev\Rapyd\Facades\Documenter');
 
 
         });
