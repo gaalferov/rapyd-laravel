@@ -1,12 +1,12 @@
 <?php
 
-namespace Zofe\Rapyd\DataForm\Field;
+namespace Iginikolaev\Rapyd\DataForm\Field;
 
 use Collective\Html\FormFacade as Form;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use MyProject\Proxies\__CG__\stdClass;
-use Zofe\Rapyd\Rapyd;
+use Iginikolaev\Rapyd\Rapyd;
 
 class Tags extends Field
 {

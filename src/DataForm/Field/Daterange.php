@@ -1,10 +1,10 @@
 <?php
 
-namespace Zofe\Rapyd\DataForm\Field;
+namespace Iginikolaev\Rapyd\DataForm\Field;
 
 use Collective\Html\FormFacade as Form;
 use Illuminate\Support\Facades\Input;
-use Zofe\Rapyd\Rapyd;
+use Iginikolaev\Rapyd\Rapyd;
 
 class Daterange extends Date
 {

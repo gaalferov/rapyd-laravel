@@ -8,7 +8,7 @@
     <p>
 
         {!! $edit !!}
-        {!! Documenter::showMethod("Zofe\\Rapyd\\Demo\\DemoController", "anyEdit") !!}
-        {!! Documenter::showCode("zofe/rapyd/views/demo/edit.blade.php") !!}
+        {!! Documenter::showMethod("Iginikolaev\\Rapyd\\Demo\\DemoController", "anyEdit") !!}
+        {!! Documenter::showCode("iginikolaev/rapyd/views/demo/edit.blade.php") !!}
     </p>
 @stop

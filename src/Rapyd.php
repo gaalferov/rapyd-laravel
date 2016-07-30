@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd;
+<?php namespace Iginikolaev\Rapyd;
 
 use Illuminate\Container\Container;
 use Collective\Html\HtmlFacade as HTML;
@@ -103,34 +103,34 @@ class Rapyd
         }
 
         if ($demo) {
-            $buffer .= HTML::style('packages/zofe/rapyd/assets/demo/style.css'); 
+            $buffer .= HTML::style('packages/iginikolaev/rapyd/assets/demo/style.css'); 
         }
         //inline styles
         if (count(self::$styles)) {
             $buffer .= sprintf("<style type=\"text/css\">\n%s\n</style>", implode("\n", self::$styles));
         }
 
-        $buffer .= HTML::style('packages/zofe/rapyd/assets/rapyd.css');
+        $buffer .= HTML::style('packages/iginikolaev/rapyd/assets/rapyd.css');
 
         return $buffer;
     }
 
     public static function js($js)
     {
-        if (!in_array('packages/zofe/rapyd/assets/'.$js, self::$js))
-            self::$js[] = 'packages/zofe/rapyd/assets/'.$js;
+        if (!in_array('packages/iginikolaev/rapyd/assets/'.$js, self::$js))
+            self::$js[] = 'packages/iginikolaev/rapyd/assets/'.$js;
     }
 
     public static function css($css)
     {
-        if (!in_array('packages/zofe/rapyd/assets/'.$css, self::$css))
-            self::$css[] = 'packages/zofe/rapyd/assets/'.$css;
+        if (!in_array('packages/iginikolaev/rapyd/assets/'.$css, self::$css))
+            self::$css[] = 'packages/iginikolaev/rapyd/assets/'.$css;
     }
 
     public static function tag($tag)
     {
-        if (!in_array('packages/zofe/rapyd/assets/'.$tag, self::$tag))
-            self::$tag[] = 'packages/zofe/rapyd/assets/'.$tag;
+        if (!in_array('packages/iginikolaev/rapyd/assets/'.$tag, self::$tag))
+            self::$tag[] = 'packages/iginikolaev/rapyd/assets/'.$tag;
     }
     
     public static function script($script)

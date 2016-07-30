@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd\Demo;
+<?php namespace Iginikolaev\Rapyd\Demo;
 
 /**
  * ArticleDetail
@@ -11,7 +11,7 @@ class ArticleDetail extends \Eloquent
 
     public function article()
     {
-        return $this->belongsTo('Zofe\Rapyd\Models\Article', 'article_id');
+        return $this->belongsTo('Iginikolaev\Rapyd\Models\Article', 'article_id');
     }
 
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Zofe\Rapyd;
+namespace Iginikolaev\Rapyd;
 
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
-use Zofe\Rapyd\Exceptions\DataSetException;
+use Iginikolaev\Rapyd\Exceptions\DataSetException;
 
 class DataSet extends Widget
 {
@@ -51,7 +51,7 @@ class DataSet extends Widget
         $ins->source = $source;
 
         //inherit cid from datafilter
-        if ($ins->source instanceof \Zofe\Rapyd\DataFilter\DataFilter) {
+        if ($ins->source instanceof \Iginikolaev\Rapyd\DataFilter\DataFilter) {
             $ins->cid = $ins->source->cid;
         }
         //generate new component id
@@ -141,7 +141,7 @@ class DataSet extends Widget
             $this->type = "model";
             $this->query = $this->source;
 
-        } elseif ( is_a($this->source, "\Zofe\Rapyd\DataFilter\DataFilter")) {
+        } elseif ( is_a($this->source, "\Iginikolaev\Rapyd\DataFilter\DataFilter")) {
            $this->type = "model";
            $this->query = $this->source->query;
 

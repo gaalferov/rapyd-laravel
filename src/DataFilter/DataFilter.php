@@ -1,9 +1,9 @@
 <?php
 
-namespace Zofe\Rapyd\DataFilter;
+namespace Iginikolaev\Rapyd\DataFilter;
 
-use Zofe\Rapyd\DataForm\DataForm;
-use Zofe\Rapyd\Persistence;
+use Iginikolaev\Rapyd\DataForm\DataForm;
+use Iginikolaev\Rapyd\Persistence;
 use Collective\Html\FormFacade as Form;
 use Illuminate\Support\Facades\DB;
 

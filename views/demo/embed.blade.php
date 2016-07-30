@@ -48,9 +48,9 @@
     </code>
     </pre>
 
-    {!! Documenter::showMethod("Zofe\\Rapyd\\Demo\\DemoController", "getEmbed") !!}
-    {!! Documenter::showMethod("Zofe\\Rapyd\\Demo\\DemoController", "getNudegrid") !!}
-    {!! Documenter::showMethod("Zofe\\Rapyd\\Demo\\DemoController", "anyNudeedit") !!}
-    {!! Documenter::showCode("zofe/rapyd/views/demo/embed.blade.php") !!}
+    {!! Documenter::showMethod("Iginikolaev\\Rapyd\\Demo\\DemoController", "getEmbed") !!}
+    {!! Documenter::showMethod("Iginikolaev\\Rapyd\\Demo\\DemoController", "getNudegrid") !!}
+    {!! Documenter::showMethod("Iginikolaev\\Rapyd\\Demo\\DemoController", "anyNudeedit") !!}
+    {!! Documenter::showCode("iginikolaev/rapyd/views/demo/embed.blade.php") !!}
 
 @stop

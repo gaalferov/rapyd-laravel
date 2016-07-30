@@ -1,7 +1,7 @@
 {
-    "name": "zofe/rapyd",
+    "name": "iginikolaev/rapyd",
     "description": "crud widgets for laravel, to make an admin in few lines of code",
-    "homepage": "https://github.com/zofe/rapyd-laravel",
+    "homepage": "https://github.com/iginikolaev/rapyd-laravel",
     "keywords": ["laravel", "crud", "rapyd", "administrator", "admin", "backend", "datatable", "form"],
     "authors": [
         {
@@ -24,7 +24,7 @@
             "migrations"
         ],
         "psr-4": {
-            "Zofe\\Rapyd\\": "src/"
+            "Iginikolaev\\Rapyd\\": "src/"
         }
     }
 }

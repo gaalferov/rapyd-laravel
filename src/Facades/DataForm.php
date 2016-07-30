@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd\Facades;
+<?php namespace Iginikolaev\Rapyd\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -9,6 +9,6 @@ class DataForm extends Facade
    *
    * @return string
    */
-  protected static function getFacadeAccessor() { return 'Zofe\Rapyd\DataForm\DataForm'; }
+  protected static function getFacadeAccessor() { return 'Iginikolaev\Rapyd\DataForm\DataForm'; }
 
 }

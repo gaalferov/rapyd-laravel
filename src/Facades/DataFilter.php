@@ -1,4 +1,4 @@
-<?php namespace Zofe\Rapyd\Facades;
+<?php namespace Iginikolaev\Rapyd\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -9,6 +9,6 @@ class DataFilter extends Facade
    *
    * @return string
    */
-  protected static function getFacadeAccessor() { return 'Zofe\Rapyd\DataFilter\DataFilter'; }
+  protected static function getFacadeAccessor() { return 'Iginikolaev\Rapyd\DataFilter\DataFilter'; }
 
 }

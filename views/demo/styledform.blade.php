@@ -51,7 +51,7 @@
 
        </div>
 
-        {!! Documenter::showMethod("Zofe\\Rapyd\\Demo\\DemoController", array("anyStyledform")) !!}
-        {!! Documenter::showCode("zofe/rapyd/views/demo/styledform.blade.php") !!}
+        {!! Documenter::showMethod("Iginikolaev\\Rapyd\\Demo\\DemoController", array("anyStyledform")) !!}
+        {!! Documenter::showCode("iginikolaev/rapyd/views/demo/styledform.blade.php") !!}
 
 @stop
