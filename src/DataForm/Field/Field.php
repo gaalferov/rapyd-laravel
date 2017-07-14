@@ -90,7 +90,7 @@ abstract class Field extends Widget
     {
         parent::__construct();
 
-        $this->attributes = config('rapyd.fields.attributes', ['class'=>'form-control']);
+        $this->attributes = config('rapyd.fields.attributes', ['class' => 'form-control']);
         $this->model = $model;
         $this->model_relations = $model_relations;
 
@@ -100,6 +100,7 @@ abstract class Field extends Widget
 
     /**
      * check for relation notation and split relation-name and fiel-dname
+     *
      * @param $name
      */
     protected function setName($name)
@@ -125,16 +126,19 @@ abstract class Field extends Widget
             $this->rel_field = $name;
             $this->name = ($name != $relation) ? $relation . "_" . $name : $name;
 
-            if (is_a(@$this->relation, 'Illuminate\Database\Eloquent\Relations\BelongsTo')){
+            if (is_a(@$this->relation, 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
                 $this->db_name = $this->relation->getForeignKey();
             } else {
                 $this->db_name = $name;
             }
 
-            if (is_a(@$this->relation, 'Illuminate\Database\Eloquent\Relations\BelongsToMany')){
+            if (is_a(@$this->relation, 'Illuminate\Database\Eloquent\Relations\BelongsToMany')) {
 
-                $this->rel_other_key = $this->relation->getOtherKey();
-
+                if (app()->version() < '5.3.0') {
+                    $this->rel_other_key = $this->relation->getOtherKey();
+                } else {
+                    $this->rel_other_key = $this->relation->getQualifiedRelatedKeyName();
+                }
             }
 
             return;
@@ -143,8 +147,9 @@ abstract class Field extends Widget
         //otherwise replace dots with underscores so field names are html/js friendly
         $this->name = str_replace(array(".", ",", "`"), array("_", "_", "_"), $name);
 
-        if (!isset($this->db_name))
+        if (!isset($this->db_name)) {
             $this->db_name = $name;
+        }
     }
 
     public function onchange($onchange)
@@ -157,7 +162,9 @@ abstract class Field extends Widget
 
     /**
      * add rules for field es.:  required|min:5 ...
+     *
      * @param $rule
+     *
      * @return $this
      */
     public function rule($rule)
@@ -181,18 +188,18 @@ abstract class Field extends Widget
      */
     public function unique($id = null, $idClumn = null, $extra = null)
     {
-        $id = $id ?: $this->model->id ?: 'NULL';
-        $idClumn = $idClumn ?: $this->model->getKeyName();
+        $id = $id ? : $this->model->id ? : 'NULL';
+        $idClumn = $idClumn ? : $this->model->getKeyName();
 
         $parts = [
             "unique:{$this->model->getConnectionName()}.{$this->model->getTable()}",
             $this->db_name,
             $id,
-            $idClumn
+            $idClumn,
         ];
 
         if ($extra) {
-            $parts []= trim($extra, ',');
+            $parts [] = trim($extra, ',');
         }
 
         $this->rule(join(',', $parts));
@@ -244,6 +251,7 @@ abstract class Field extends Widget
     {
         $this->insert_value = $insert_value;
         $this->insert_description = $insert_description;
+
         return $this;
     }
 
@@ -258,6 +266,7 @@ abstract class Field extends Widget
     {
         $this->update_value = $update_value;
         $this->update_description = $update_description;
+
         return $this;
     }
 
@@ -289,11 +298,11 @@ abstract class Field extends Widget
         $process = (Input::get('search') || Input::get('save')) ? true : false;
 
         //fix, don't refill on file fields
-        if (in_array($this->type, array('file','image'))) {
+        if (in_array($this->type, array('file', 'image'))) {
             $this->request_refill = false;
         }
 
-        if ($this->request_refill == true && $process && Input::exists($this->name) ) {
+        if ($this->request_refill == true && $process && Input::exists($this->name)) {
             if ($this->multiple) {
 
                 $this->value = "";
@@ -305,12 +314,10 @@ abstract class Field extends Widget
                         $this->value = implode($this->serialization_sep, $values);
                     }
                 }
-
             } else {
                 $this->value = HTML::xssfilter(Input::get($this->name));
             }
             $this->is_refill = true;
-
         } elseif (($this->status == "create") && ($this->insert_value != null)) {
             $this->value = $this->insert_value;
             if ($this->insert_description != null) {
@@ -333,7 +340,7 @@ abstract class Field extends Widget
 
                     // some kind of field on belongsToMany works with multiple values, most of time in serialized way
                     //in this case I need to fill value using a serialized array of related collection
-                    if (in_array($this->type, array('tags','checks','multiselect'))) {
+                    if (in_array($this->type, array('tags', 'checks', 'multiselect'))) {
                         $relatedCollection = $this->relation->get(); //Collection of attached models
                         $relatedIds = $relatedCollection->modelKeys(); //array of attached models ids
                         $this->value = implode($this->serialization_sep, $relatedIds);
@@ -394,7 +401,6 @@ abstract class Field extends Widget
                         $this->new_value = implode($this->serialization_sep, $values);
                     }
                 }
-
             } else {
 
                 $this->new_value = HTML::xssfilter(Input::get($this->name));
@@ -457,7 +463,7 @@ abstract class Field extends Widget
             if (is_string($this->when) and strpos($this->when, '|')) {
                 $this->when = explode('|', $this->when);
             }
-            $this->when = (array) $this->when;
+            $this->when = (array)$this->when;
             if (!in_array($this->status, $this->when) and !in_array($this->action, $this->when)) {
                 $this->visible = false;
                 $this->apply_rules = false;
@@ -472,8 +478,7 @@ abstract class Field extends Widget
     {
         if (is_array($options)) {
             $this->options += $options;
-        }
-        else {
+        } else {
             $this->options += $options->all();
         }
 
@@ -495,45 +500,51 @@ abstract class Field extends Widget
         return $this;
     }
 
-    public function editable() 
+    public function editable()
     {
         if ($this->mode == 'readonly') {
             return $this->edited;
         }
+
         return true;
     }
-    
+
     public function autoUpdate($save = false)
     {
         $this->getValue();
         $this->getNewValue();
-        if (!$this->editable()) return true;
-        
+        if (!$this->editable()) {
+            return true;
+        }
+
         if (is_object($this->model) && isset($this->db_name)) {
             if (
-                !(Schema::connection($this->model->getConnectionName())->hasColumn($this->model->getTable(), $this->db_name)
-                || $this->model->hasSetMutator($this->db_name))
-                || is_a($this->relation, 'Illuminate\Database\Eloquent\Relations\Relation') //Relation
-                ) {
+                !(Schema::connection($this->model->getConnectionName())->hasColumn($this->model->getTable(),
+                        $this->db_name)
+                    || $this->model->hasSetMutator($this->db_name))
+                || is_a($this->relation,
+                    'Illuminate\Database\Eloquent\Relations\Relation') //Relation
+            ) {
 
                 //belongsTo relation 
                 if (is_a($this->relation, 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
                     $this->model->setAttribute($this->db_name, $this->new_value);
+
                     return true;
                 }
                 //other kind of relations are postponed
-                $self = $this; 
+                $self = $this;
                 $this->model->saved(function () use ($self) {
                     $self->updateRelations();
                 });
-                
+
                 //check for relation then exit
                 return true;
             }
             if (!is_a($this->relation, 'Illuminate\Database\Eloquent\Relations\Relation')) {
                 $this->model->setAttribute($this->db_name, $this->new_value);
             }
-            
+
             if ($save) {
                 return $this->model->save();
             }
@@ -552,7 +563,7 @@ abstract class Field extends Widget
         if ($this->relation != null) {
 
             //dd($this->relation, get_class($this->relation));
-            
+
             $methodClass = get_class($this->relation);
             switch ($methodClass) {
                 case 'Illuminate\Database\Eloquent\Relations\BelongsToMany':
@@ -562,7 +573,7 @@ abstract class Field extends Widget
 
                     $this->relation->detach($old_data);
 
-                    if ($data=='') {
+                    if ($data == '') {
                         continue;
                     }
 
@@ -582,13 +593,15 @@ abstract class Field extends Widget
                         $relation = $this->model_relations[$this->rel_name];
                     } else {
                         $relation = $this->relation->get()->first();
-                        if (!$relation) $relation = $this->relation->getRelated();
+                        if (!$relation) {
+                            $relation = $this->relation->getRelated();
+                        }
                         $this->model_relations[$this->rel_name] = $relation;
                     }
                     $relation->{$this->rel_field} = $data;
-                    $this->relation->save( $relation );
+                    $this->relation->save($relation);
                     break;
-                
+
                 case 'Illuminate\Database\Eloquent\Relations\HasOneOrMany':
 
                 case 'Illuminate\Database\Eloquent\Relations\HasMany':
@@ -607,69 +620,88 @@ abstract class Field extends Widget
 
     /**
      * parse blade syntax string using current model
+     *
      * @param $string
      * @param bool $is_view
+     *
      * @return string
      */
     protected function parseString($string, $is_view = false)
     {
-        if (is_object($this->model) && (strpos($string,'{{') !== false || strpos($string,'{!!') !== false || $is_view)) {
+        if (is_object($this->model) && (strpos($string, '{{') !== false || strpos($string,
+                    '{!!') !== false || $is_view)
+        ) {
             $fields = $this->model->getAttributes();
             $relations = $this->model->getRelations();
-            $array = array_merge($fields, $relations, ['model'=>$this->model]) ;
-            $string = ($is_view) ? view($string, $array) : $this->parser->compileString($string, $array);
+            $array = array_merge($fields, $relations, ['model' => $this->model]);
+            $string = ($is_view) ? view($string, $array) : $this->parser->compileString($string,
+                $array);
         }
 
         return $string;
     }
 
     /**
-     * parse blade view passing current model 
+     * parse blade view passing current model
+     *
      * @param $view
+     *
      * @return string
      */
     protected function parseView($view)
     {
         return $this->parseString($view, true);
     }
-    
 
     public function build()
     {
-        if($this->label == '') {
+        if ($this->label == '') {
             $this->has_wrapper = false;
         }
         $this->getValue();
 //        $this->star = (!($this->status == "show") and $this->required) ? '&nbsp;*' : '';
         $this->req = (!($this->status == "show") and $this->required) ? ' required' : '';
-        if (($this->status == "hidden" || $this->visible === false || in_array($this->type, array("hidden", "auto")))) {
+        if (($this->status == "hidden" || $this->visible === false || in_array($this->type,
+                array("hidden", "auto")))
+        ) {
             $this->is_hidden = true;
         }
         $this->message = implode("<br />\n", $this->messages);
 
-        $attributes = array('onchange', 'type', 'size', 'style', 'class', 'rows', 'cols', 'placeholder');
+        $attributes = array(
+            'onchange',
+            'type',
+            'size',
+            'style',
+            'class',
+            'rows',
+            'cols',
+            'placeholder',
+        );
 
         foreach ($attributes as $attribute) {
-            if (isset($this->$attribute))
+            if (isset($this->$attribute)) {
                 $this->attributes[$attribute] = $this->$attribute;
+            }
 
             if ($attribute == 'type') {
                 $this->attributes['type'] = ($this->$attribute == 'input') ? 'text' : $this->$attribute;
             }
 
             if ($this->orientation == 'inline' || $this->has_placeholder) {
-                if ($this->type!='select') {
+                if ($this->type != 'select') {
                     $this->attributes["placeholder"] = $this->label;
                 }
             }
-
         }
-        if (!isset($this->attributes['id']))
+        if (!isset($this->attributes['id'])) {
             $this->attributes['id'] = $this->name;
+        }
         if (isset($this->css_class)) {
-            if (!isset($this->attributes['class']))
+            if (!isset($this->attributes['class'])) {
                 $this->attributes['class'] = '';
-            $this->attributes['class'] .= " ".$this->css_class;
+            }
+            $this->attributes['class'] .= " " . $this->css_class;
         }
 
         if ($this->visible === false) {
@@ -677,7 +709,7 @@ abstract class Field extends Widget
         }
     }
 
-    public function has_error($error='class="has-error"')
+    public function has_error($error = 'class="has-error"')
     {
         if ($this->has_error) {
             return $error;
@@ -699,12 +731,12 @@ abstract class Field extends Widget
 
     public function all()
     {
-        $output  = "";
+        $output = "";
         if ($this->has_wrapper && $this->has_label && $this->orientation != 'inline') {
             $output .= "<label for=\"{$this->name}\" class=\"{$this->req}\">{$this->label}</label>";
         }
         $output .= $this->output;
-        $output  = '<span id="div_'.$this->name.'">'.$output.'</span>';
+        $output = '<span id="div_' . $this->name . '">' . $output . '</span>';
         if ($this->has_error) {
             $output = "<span class=\"has-error\">{$output}<span class=\"help-block\"><span class=\"glyphicon glyphicon-warning-sign\"></span> {$this->message}</span></span>";
         }
