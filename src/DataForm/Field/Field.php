@@ -133,12 +133,13 @@ abstract class Field extends Widget
             }
 
             if (is_a(@$this->relation, 'Illuminate\Database\Eloquent\Relations\BelongsToMany')) {
-
-                if (app()->version() < '5.3.0') {
-                    $this->rel_other_key = $this->relation->getOtherKey();
-                } else {
-                    $this->rel_other_key = $this->relation->getQualifiedRelatedKeyName();
-                }
+				if (method_exists($this->relation, 'getQualifiedRelatedPivotKeyName')) {
+					$this->rel_other_key = $this->relation->getQualifiedRelatedPivotKeyName();
+				} elseif (method_exists($this->relation, 'getQualifiedRelatedKeyName')) {
+					$this->rel_other_key = $this->relation->getQualifiedRelatedKeyName();
+				} else {
+					$this->rel_other_key = $this->relation->getOtherKey();
+				}
             }
 
             return;
