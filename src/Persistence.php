@@ -5,6 +5,18 @@ use Illuminate\Support\Facades\Session;
 
 class Persistence
 {
+	
+	/**
+     * @param string $route
+     *
+     * @return string
+     */
+    public static function fromRoute($route)
+    {
+        $url = route($route, [], false);
+
+        return Session::get('rapyd.' . ltrim($url, '/'), $url);
+    }
 
     public static function get($url, $qs = '')
     {
