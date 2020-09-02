@@ -527,7 +527,7 @@ abstract class Field extends Widget
                     'Illuminate\Database\Eloquent\Relations\Relation') //Relation
             ) {
 
-                //belongsTo relation 
+                //belongsTo relation
                 if (is_a($this->relation, 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
                     $this->model->setAttribute($this->db_name, $this->new_value);
 
@@ -575,7 +575,7 @@ abstract class Field extends Widget
                     $this->relation->detach($old_data);
 
                     if ($data == '') {
-                        continue;
+                        break;
                     }
 
                     if (is_callable($this->extra_attributes)) {
