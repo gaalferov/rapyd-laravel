@@ -43,7 +43,7 @@ class Cell
             $this->attributes['class'] = '';
         }
         $this->attributes['class'] = 'col-'.preg_replace('~[^a-z0-9]~ui', '-', $this->name);
-        
+
         return HTML::buildAttributes($this->attributes);
     }
 
@@ -78,9 +78,12 @@ class Cell
 
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return $this->value;
+        return $this->value ?? '';
     }
 
 }
